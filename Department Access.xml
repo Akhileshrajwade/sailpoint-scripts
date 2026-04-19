@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell"
+name="Department Access Level Rule"
+type="IdentityAttribute">
+<Source>
+<![CDATA[
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+Logger log = Logger.getLogger("akhilesh.practice.departmentAccessRule");
+log.setLevel(Level.DEBUG);
+
+log.debug("Rule started!");
+
+String dept = "IT";
+
+if (dept == null) {
+log.warn("Department NULL for: " + identity.getName());
+return "No-Access";
+}
+
+log.debug("Department: " + dept);
+
+if (dept.equals("IT")) {
+   log.info("Assigning HIGH access");
+   return "High Access";
+} else if (dept.equals("HR")) {
+ log.info("Assigning MEDIUM access");
+ return "Medium-Access";
+} else if (dept.equals("Finance")) {
+ return "Medium-Access";
+} else {
+  log.warn("Unknown dept - assigning BASIC access");
+  return "Basic-Access";
+}
+  ]]>
+</Source>
+</Rule>
