@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell"
+   name="Employee Status Check Rule"
+   type="IdentityAttribute">
+   <Source>
+    <![CDATA[
+    import org.apache.log4j.Logger;
+    import org.apache.log4j.Level;
+
+    Logger log = Logger.getlogger("akhilesh.practice.employeeStatusRule");
+    log.setLevel(Level.DEBUG);
+
+    log.debug("Checking status for: " + identtiy.getName());
+    
+    String status = (String) identity.getAttribute("employeeStatus");
+
+    if (status== null) {
+       log.warn("Status NULL for: " + identity.getName());
+       return "Unknown";
+   }
+   
+   log.debug("Status found: " + status);
+
+   if (status.equals("Active")) {
+      log.info("Employee is ACTIVE");
+      return "Active";
+   } else if (status.equals("Terminated")) {
+      log.info("Employee TERMINATED - trigger-leaver!");
+      return "Trigger leaver";
+   } else if (status.equals("Rehire")) {
+      log.warn("Rehire status - check N-Account!");
+      return "Rehire";
+   } else {
+      log.warn("Unkonown status: " + status);
+      return "unknown";
+   }
+   ]]>
+   </Source>
+</Rule>      
