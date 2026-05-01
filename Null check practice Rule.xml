@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Null check Practice Rule" type="IdentityAttribute">
+<Description>Demonstrates proper null checking in beanshell</Description>
+<Source>
+<![CDATA[
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
+
+Logger log = Logger.getLogger("akhilesh.practice.nullCheckRule");
+log.setLevel(Level.DEBUG);
+
+log.debug("Starting null check rule");
+
+String dept = "IT";
+String email = "akhilesh@test.com";
+String manager = null;
+
+String result = "";
+
+if (dept == null) {
+log.warn("Depatment is NUll");
+result = result + "No-Dept | ";
+} else {
+   log.debug("Dept: " + dept);
+   result = result + dept + " | ";
+}
+
+if (email == null) {
+    log.warn("Email is NULL");
+    result = result + "No-Email | ";
+} else {
+    log.debug("Email: " + email);
+    result = result + email + " | ";
+}
+
+if (manager == null) {
+   log.warn("Manager is NULL");
+   result = result + "No-Manager";
+} else {
+   log.debug("Manager: " + manager);
+   result = result + manager;
+}
+
+log.info("Result: " + result);
+return result;
+]]>
+</Source>
+</Rule>
